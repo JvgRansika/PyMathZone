@@ -13,8 +13,24 @@ class Matrix:
             if not all(type(data[0]) == type(x) for x in data):
                 raise ValueError("All items in metric list should either integer or list")
 
-            if isinstance(data[0], list) and not all(isinstance(x, list) for x in data):
-                raise ValueError("All items in metric list should either integer or list")
+            if isinstance(data[0], list):
+                if not all(isinstance(x, list) for x in data):
+                    raise ValueError("All items in metric list should either integer or list")
+
+                if not all(len(data[0]) == len(x) for x in data):
+                    raise ValueError("All rows must need equal number of columns")
+
+                if not cols == len(data[0]):
+                    raise ValueError("number of columns must equal to cols")
+
+                if len(data) != rows:
+                    raise ValueError("number of rows in list must equal to rows")
+
+            elif len(data) != cols:
+                raise ValueError("number of columns must equal to cols")
+
+            elif rows != 1:
+                raise ValueError("number of rows in list must equal to rows")
 
             self.data = data
 
@@ -38,3 +54,7 @@ class Matrix:
     def inverse(self):
         # Calculate the inverse of the matrix
         pass
+
+
+n = Matrix(2,2, [1,2])
+print(n.data)
