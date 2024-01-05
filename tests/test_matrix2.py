@@ -36,11 +36,14 @@ m4 = m1.transpose()
 #print(m4.data)
 
 
-### [Determinant, Minor, Co-Factor]
+### [Determinant, Minor, Co-Factor, Inverse]
 
 m1 = Matrix(2,2, [[-2,3],[4,-9]])
 m2 = Matrix(3,3, [[42,1,6],[28,7,4],[14,3,2]])
 m3 = Matrix(4,4, [[3,2,5,7], [-1,-4,-3,0], [6,4,2,-1], [2,-1,0,3]])
 
-print(m3.determinant())
-#print(m3.minor(0, 3).data)
+#print(m3.determinant())
+#print(m2.adjoint().data)
+
+m4 = m1 * m1.inverse()
+print(m4.data)
