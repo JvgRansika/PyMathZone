@@ -74,8 +74,9 @@ class Matrix:
         return m
 
     def transpose(self):
-        # Implement matrix transpose logic
-        pass
+        m = Matrix(self.cols, self.rows)
+        transpose(self, m)
+        return m
 
     # Other operations (optional)
     def determinant(self):
