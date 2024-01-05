@@ -32,10 +32,8 @@ class Matrix:
     def get(self, r, c):
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
-        if (isinstance(self.data[r], list)):
-            return self.data[r][c]
-        else:
-            return self.data[c]
+        return self.data[r][c]
+
 
     def set(self, r, c, v, op='='):
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
