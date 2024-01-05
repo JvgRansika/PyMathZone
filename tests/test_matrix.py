@@ -49,12 +49,12 @@ class TestMatrix(unittest.TestCase):
             Matrix(2, 2, data)
 
     def test_init_invalid_data_single_list_length(self):
-        data = [1, 2]
+        data = [[1, 2]]
         with self.assertRaises(ValueError):
             Matrix(1, 3, data)
 
     def test_init_invalid_data_single_list_rows(self):
-        data = [1, 2, 3]
+        data = [[1, 2, 3]]
         with self.assertRaises(ValueError):
             Matrix(2, 3, data)
 
