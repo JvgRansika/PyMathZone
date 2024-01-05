@@ -69,10 +69,17 @@ class Matrix:
         return m
 
     def __mul__(m1, m2):
-        if (m1.cols != m2.rows): raise Exception("The column count of first matrix must be equal to row count of second matrix!")
-        m = Matrix(m1.rows, m2.cols)
-        multiply(m1, m2, m)
-        return m
+        if isinstance(m2, Matrix):
+            if (m1.cols != m2.rows): raise Exception("The column count of first matrix must be equal to row count of second matrix!")
+            m = Matrix(m1.rows, m2.cols)
+            multiply(m1, m2, m)
+            return m
+        elif isinstance(m2, int) or isinstance(m2, float):
+            m = Matrix(m1.rows, m1.cols)
+            multiply(m1, m2, m)
+            return m
+        else:
+            raise Exception("Invalid multiplication!")
 
     def __eq__(self, other):
         if not isinstance(other, Matrix):
@@ -87,16 +94,31 @@ class Matrix:
                     return False
 
         return True
+    
+    def isSquare(self):
+        return self.rows == self.cols
 
     def transpose(self):
         m = Matrix(self.cols, self.rows)
         transpose(self, m)
         return m
 
-    # Other operations (optional)
     def determinant(self):
-        # Calculate the determinant of the matrix
-        pass
+        return determinant(self)   
+
+    def minor(self, r, c):
+        if (not self.isSquare()):
+            raise Exception("This only for square matrices!")
+        if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
+            raise Exception("Invalid position!")
+        return minor(self, r, c)
+
+    def cofactor(self, r, c):
+        if (not self.isSquare()):
+            raise Exception("This only for square matrices!")
+        if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
+            raise Exception("Invalid position!")
+        return cofactor(self, r, c)
 
     def inverse(self):
         # Calculate the inverse of the matrix
