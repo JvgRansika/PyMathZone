@@ -1,3 +1,5 @@
+from .utils.matrix import *
+
 class Matrix:
     def __init__(self, rows: int, cols: int, data=None):
         if not isinstance(rows, int) and not isinstance(cols, int):
@@ -34,13 +36,17 @@ class Matrix:
 
             self.data = data
 
-    def __add__(self):
-        # Implement matrix addition logic
-        pass
+    def __add__(m1, m2):
+        if (m1.rows != m2.rows or m1.cols != m2.cols): raise Exception("Sizes of both matrix must be equal!")
+        m = Matrix(m1.rows, m1.cols)
+        addition(m1, m2, m)
+        return m
 
-    def __mul__(self):
-        # Implement matrix multiplication logic
-        pass
+    def __mul__(m1, m2):
+        if (m1.cols != m2.rows): raise Exception("The column count of first matrix must be equal to row count of second matrix!")
+        m = Matrix(m1.rows, m2.cols)
+        multiply(m1, m2, m)
+        return m
 
     def transpose(self):
         # Implement matrix transpose logic
@@ -54,7 +60,3 @@ class Matrix:
     def inverse(self):
         # Calculate the inverse of the matrix
         pass
-
-
-n = Matrix(2,2, [1,2])
-print(n.data)
