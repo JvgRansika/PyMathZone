@@ -3,6 +3,9 @@ from .utils.matrix import *
 
 class Matrix:
     def __init__(self, rows: int, cols: int, data=None):
+        """
+        :param data: must in list of list format. [[], []]
+        """
         if not isinstance(rows, int) and not isinstance(cols, int):
             raise TypeError("rows and columns must be a integer values")
 
@@ -12,27 +15,16 @@ class Matrix:
         if data is None:
             self.data = [[0] * cols for _ in range(rows)]
         else:
-            # ToDo change this logic to match for any type of metrix
-            if not all(type(data[0]) == type(x) for x in data):
-                raise ValueError("All items in metric list should either integer or list")
+            if not all(isinstance(x, list) for x in data):
+                raise ValueError("All rows in metric list should be lists")
 
-            if isinstance(data[0], list):
-                if not all(isinstance(x, list) for x in data):
-                    raise ValueError("All items in metric list should either integer or list")
+            if not all(len(data[0]) == len(x) for x in data):
+                raise ValueError("All rows must need equal number of columns")
 
-                if not all(len(data[0]) == len(x) for x in data):
-                    raise ValueError("All rows must need equal number of columns")
-
-                if not cols == len(data[0]):
-                    raise ValueError("number of columns must equal to cols")
-
-                if len(data) != rows:
-                    raise ValueError("number of rows in list must equal to rows")
-
-            elif len(data) != cols:
+            if not cols == len(data[0]):
                 raise ValueError("number of columns must equal to cols")
 
-            elif rows != 1:
+            if len(data) != rows:
                 raise ValueError("number of rows in list must equal to rows")
 
             self.data = data
@@ -40,27 +32,19 @@ class Matrix:
     def get(self, r, c):
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
-        if (isinstance(self.data[r], list)):
-            return self.data[r][c]
-        else:
-            return self.data[c]
+        return self.data[r][c]
+
 
     def set(self, r, c, v, op='='):
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
 
-        if (isinstance(self.data[r], list)):
-            if (op == '='): self.data[r][c] = v
-            elif (op == '+'): self.data[r][c] += v
-            elif (op == '-'): self.data[r][c] -= v
-            elif (op == '*'): self.data[r][c] *= v
-            elif (op == '/'): self.data[r][c] /= v
-        else:
-            if (op == '='): self.data[r] = v
-            elif (op == '+'): self.data[r] += v
-            elif (op == '-'): self.data[r] -= v
-            elif (op == '*'): self.data[r] *= v
-            elif (op == '/'): self.data[r] /= v
+        if (op == '='): self.data[r][c] = v
+        elif (op == '+'): self.data[r][c] += v
+        elif (op == '-'): self.data[r][c] -= v
+        elif (op == '*'): self.data[r][c] *= v
+        elif (op == '/'): self.data[r][c] /= v
+
 
     def __add__(m1, m2):
         if (m1.rows != m2.rows or m1.cols != m2.cols): raise Exception("Sizes of both matrix must be equal!")
@@ -80,6 +64,15 @@ class Matrix:
             return m
         else:
             raise Exception("Invalid multiplication!")
+
+    def __rmul__(self, other):
+        if not isinstance(other, int) and not isinstance(other, float):
+            raise ValueError("Invalid multiplication!")
+
+        m = Matrix(self.rows, self.cols)
+        multiply(self, other, m)
+        return m
+
 
     def __eq__(self, other):
         if not isinstance(other, Matrix):
