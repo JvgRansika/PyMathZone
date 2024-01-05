@@ -75,12 +75,16 @@ class Matrix:
         return m
 
     def __eq__(self, other):
+        if not isinstance(other, Matrix):
+            return False
+
         if self.rows != other.rows or self.cols != other.cols:
             return False
 
-        for r, c in zip(range(self.rows), range(self.cols)):
-            if self.get(r, c) != other.get(r, c):
-                return False
+        for r in range(self.rows):
+            for c in range(self.cols):
+                if self.get(r, c) != other.get(r, c):
+                    return False
 
         return True
 
