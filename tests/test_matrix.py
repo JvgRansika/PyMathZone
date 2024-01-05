@@ -59,34 +59,29 @@ class TestMatrix(unittest.TestCase):
             Matrix(2, 3, data)
 
     def test_equal_matrices(self):
-        matrix1 = Matrix(2,2, [[1, 2], [3, 4]])
-        matrix2 = Matrix(2,2,[[1, 2], [3, 4]])
+        matrix1 = Matrix(2, 2, [[1, 2], [3, 4]])
+        matrix2 = Matrix(2, 2, [[1, 2], [3, 4]])
         self.assertTrue(matrix1 == matrix2)  # Test for equality
 
     def test_unequal_rows(self):
-        matrix1 = Matrix(2,2,[[1, 2], [3, 4]])
-        matrix2 = Matrix(2,3,[[1, 2, 0], [3, 4, 5]])
+        matrix1 = Matrix(2, 2, [[1, 2], [3, 4]])
+        matrix2 = Matrix(2, 3, [[1, 2, 0], [3, 4, 5]])
         self.assertFalse(matrix1 == matrix2)  # Test for inequality (different rows)
 
     def test_unequal_columns(self):
-        matrix1 = Matrix(2,2,[[1, 2], [3, 4]])
-        matrix2 = Matrix(2,3,[[1, 2, 3], [3, 4, 0]])
+        matrix1 = Matrix(2, 2, [[1, 2], [3, 4]])
+        matrix2 = Matrix(2, 3, [[1, 2, 3], [3, 4, 0]])
         self.assertFalse(matrix1 == matrix2)  # Test for inequality (different columns)
 
     def test_different_values(self):
-        matrix1 = Matrix(2,2,[[1, 2], [3, 4]])
-        matrix2 = Matrix(2,2,[[1, 5], [3, 4]])
+        matrix1 = Matrix(2, 2, [[1, 2], [3, 4]])
+        matrix2 = Matrix(2, 2, [[1, 5], [3, 4]])
         self.assertFalse(matrix1 == matrix2)  # Test for inequality (different values)
 
     def test_different_types(self):
-        matrix1 = Matrix(2,2,[[1, 2], [3, 4]])
+        matrix1 = Matrix(2, 2, [[1, 2], [3, 4]])
         other = "not a matrix"
         self.assertFalse(matrix1 == other)  # Test for inequality (different types)
-
-
-
-
-
 
 
 if __name__ == '__main__':
