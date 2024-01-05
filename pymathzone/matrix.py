@@ -1,5 +1,6 @@
 from .utils.matrix import *
 
+
 class Matrix:
     def __init__(self, rows: int, cols: int, data=None):
         if not isinstance(rows, int) and not isinstance(cols, int):
@@ -39,16 +40,16 @@ class Matrix:
     def get(self, r, c):
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
-        if (isinstance(self.data[r], list)): 
-            return self.data[r][c] 
+        if (isinstance(self.data[r], list)):
+            return self.data[r][c]
         else:
-            return self.data[c] 
+            return self.data[c]
 
     def set(self, r, c, v, op='='):
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
-        
-        if (isinstance(self.data[r], list)): 
+
+        if (isinstance(self.data[r], list)):
             if (op == '='): self.data[r][c] = v
             elif (op == '+'): self.data[r][c] += v
             elif (op == '-'): self.data[r][c] -= v
@@ -72,6 +73,16 @@ class Matrix:
         m = Matrix(m1.rows, m2.cols)
         multiply(m1, m2, m)
         return m
+
+    def __eq__(self, other):
+        if self.rows != other.rows or self.cols != other.cols:
+            return False
+
+        for r, c in zip(range(self.rows), range(self.cols)):
+            if self.get(r, c) != other.get(r, c):
+                return False
+
+        return True
 
     def transpose(self):
         m = Matrix(self.cols, self.rows)
