@@ -50,7 +50,7 @@ class Matrix:
         if (m1.rows != m2.rows or m1.cols != m2.cols): raise Exception("Sizes of both matrix must be equal!")
         m = Matrix(m1.rows, m1.cols)
         addition(m1, m2, m)
-        return m
+        return None
 
     def __mul__(m1, m2):
         if isinstance(m2, Matrix):
