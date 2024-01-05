@@ -29,7 +29,7 @@ class TestMatrix(unittest.TestCase):
         self.assertEqual(matrix.data, data)
 
     def test_init_valid_data_single_list(self):
-        data = [1, 2, 3]
+        data = [[1, 2, 3]]
         matrix = Matrix(1, 3, data)
         self.assertEqual(matrix.data, data)
 
