@@ -140,7 +140,5 @@ class Matrix:
 
         if (det == 0):
             raise Exception("The determinant of matrix is zero!")
-        
-        print(1 / det)
 
         return self.adjoint() * (1 / det)
