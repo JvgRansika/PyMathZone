@@ -2,9 +2,9 @@ import sys
 
 sys.path.append('../pymathzone')
 
-from pymathzone.Matrix import Matrix
+from pymathzone.matrix import Matrix
 
-'''
+
 ### [Addition]
 
 m1 = Matrix(2,2, [[1,2],[3,4]])
@@ -12,7 +12,7 @@ m2 = Matrix(2,2, [[4,3],[2,1]])
 m3 = Matrix(2,2, [[1,1], [1,1]])
 
 m4 = m1 + m2 + m3
-'''
+
 
 '''
 ### [Multiplication]
@@ -25,11 +25,12 @@ m2 = Matrix(2,1, [[4], [3]])
 
 m4 = m1 * m2
 '''
-
+'''
 ### [Transpose]
 
 m1 = Matrix(2,2, [[1, 2],[3, 4]])
 
 m4 = m1.transpose() 
+'''
 
 print(m4.data)
