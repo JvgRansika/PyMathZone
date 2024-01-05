@@ -119,7 +119,28 @@ class Matrix:
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
         return cofactor(self, r, c)
+    
+    def cofactorMatrix(self):
+        if (not self.isSquare()):
+            raise Exception("This only for square matrices!")
+        
+        m = Matrix(self.rows, self.cols)
+
+        for i in range(m.rows):
+            for j in range(m.cols):
+                m.set(i, j, self.cofactor(i, j))
+
+        return m
+    
+    def adjoint(self):
+        return self.cofactorMatrix().transpose()
 
     def inverse(self):
-        # Calculate the inverse of the matrix
-        pass
+        det = self.determinant()
+
+        if (det == 0):
+            raise Exception("The determinant of matrix is zero!")
+        
+        print(1 / det)
+
+        return self.adjoint() * (1 / det)
