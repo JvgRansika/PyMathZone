@@ -65,6 +65,15 @@ class Matrix:
         else:
             raise Exception("Invalid multiplication!")
 
+    def __rmul__(self, other):
+        if not isinstance(other, int) and not isinstance(other, float):
+            raise ValueError("Invalid multiplication!")
+
+        m = Matrix(self.rows, self.cols)
+        multiply(self, other, m)
+        return m
+
+
     def __eq__(self, other):
         if not isinstance(other, Matrix):
             return False
