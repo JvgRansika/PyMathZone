@@ -36,6 +36,31 @@ class Matrix:
 
             self.data = data
 
+    def get(self, r, c):
+        if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
+            raise Exception("Invalid position!")
+        if (isinstance(self.data[r], list)): 
+            return self.data[r][c] 
+        else:
+            return self.data[c] 
+
+    def set(self, r, c, v, op='='):
+        if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
+            raise Exception("Invalid position!")
+        
+        if (isinstance(self.data[r], list)): 
+            if (op == '='): self.data[r][c] = v
+            elif (op == '+'): self.data[r][c] += v
+            elif (op == '-'): self.data[r][c] -= v
+            elif (op == '*'): self.data[r][c] *= v
+            elif (op == '/'): self.data[r][c] /= v
+        else:
+            if (op == '='): self.data[r] = v
+            elif (op == '+'): self.data[r] += v
+            elif (op == '-'): self.data[r] -= v
+            elif (op == '*'): self.data[r] *= v
+            elif (op == '/'): self.data[r] /= v
+
     def __add__(m1, m2):
         if (m1.rows != m2.rows or m1.cols != m2.cols): raise Exception("Sizes of both matrix must be equal!")
         m = Matrix(m1.rows, m1.cols)
