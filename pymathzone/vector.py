@@ -1,3 +1,6 @@
+from .utils.vector import *
+
+
 class Vector:
     """
      Vector class representing a vector in n-dimensional space.
@@ -19,7 +22,26 @@ class Vector:
         Initialize a vector with a tuple
         :param components: a tuple contain vector's components.
         """
-        if not isinstance(components, tuple):
-            raise ValueError("components must be a tuple")
+        if not components:
+            self.components = (0, 0, 0)
+        else:
+            if not isinstance(components, tuple) and not isinstance(components, list):
+                raise ValueError("components must be a tuple")
 
-        self.components = components
+            self.components = tuple(components)
+
+    def __add__(self, other):
+        """
+        adding two vectors
+        :param other:
+        :return: vector
+        """
+        if isinstance(other, Vector):
+            pass
+        else:
+            raise ValueError("Invalid addition!")
+
+        return Vector(addition(self, other))
+
+    def get_dimension(self):
+        return len(self.components)
