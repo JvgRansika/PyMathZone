@@ -34,6 +34,26 @@ class TestVector(unittest.TestCase):
         result = v1 + v2
         self.assertEqual(result.components, (0, 0, 0))
 
+    # subtraction
+    def test_subtraction_with_vector(self):
+        vector1 = Vector((5, 3))
+        vector2 = Vector((2, 1))
+        result = vector1 - vector2
+        expected = Vector((3, 2))
+        self.assertEqual(result, expected)
+
+    def test_subtraction_with_scalar(self):
+        vector = Vector((4, 2))
+        with self.assertRaises(ValueError) as context:
+            vector - 5
+        self.assertEqual(str(context.exception), "Invalid subtraction!")
+
+    def test_subtraction_with_invalid_type(self):
+        vector = Vector((1, 2))
+        with self.assertRaises(ValueError) as context:
+            vector - "hello"
+        self.assertEqual(str(context.exception), "Invalid subtraction!")
+
     def test_multiplication_with_scalar(self):
         vector = Vector((2, 3))
         result = vector * 2
