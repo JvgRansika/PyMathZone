@@ -51,5 +51,20 @@ class Vector:
 
         return self.components == other.components
 
+    def __mul__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            return Vector(multiply_with_scalar(self, other))
+        else:
+            raise Exception("Invalid multiplication")
+
+    def dot(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            return self.__mul__(other)
+        elif isinstance(other, Vector):
+            return dot_multiplication_with_vector(self,other)
+        else:
+            raise Exception("Invalid dot product")
+
+
     def get_dimension(self):
         return len(self.components)
