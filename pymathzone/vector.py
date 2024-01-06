@@ -43,5 +43,13 @@ class Vector:
 
         return Vector(addition(self, other))
 
+    def __eq__(self, other):
+        if not isinstance(other, Vector):
+            return False
+        if self.get_dimension() != other.get_dimension():
+            return False
+
+        return self.components == other.components
+
     def get_dimension(self):
         return len(self.components)
