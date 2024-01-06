@@ -9,6 +9,12 @@ class TestMatrix(unittest.TestCase):
         result = matrix1 + matrix2
         self.assertEqual(result.data, [[8, 10, 12], [14, 16, 18]])
 
+    def test_sub(self):
+        matrix1 = Matrix(2, 3, [[1, 2, 3], [4, 5, 6]])
+        matrix2 = Matrix(2, 3, [[7, 8, 9], [10, 11, 12]])
+        result = matrix1 - matrix2
+        self.assertEqual(result.data, [[-6, -6, -6], [-6, -6, -6]])
+
     def test_init_valid_rows_cols(self):
         matrix = Matrix(2, 3)
         self.assertEqual(matrix.rows, 2)
