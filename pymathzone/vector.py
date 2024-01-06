@@ -37,11 +37,15 @@ class Vector:
         :return: vector
         """
         if isinstance(other, Vector):
-            pass
+            return Vector(addition(self, other))
         else:
             raise ValueError("Invalid addition!")
 
-        return Vector(addition(self, other))
+    def __sub__(self, other):
+        if isinstance(other, Vector):
+            return self.__add__(-1 * other)
+        else:
+            raise ValueError("Invalid subtraction!")
 
     def __eq__(self, other):
         if not isinstance(other, Vector):
@@ -57,14 +61,17 @@ class Vector:
         else:
             raise Exception("Invalid multiplication")
 
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+
     def dot(self, other):
         if isinstance(other, int) or isinstance(other, float):
             return self.__mul__(other)
         elif isinstance(other, Vector):
-            return dot_multiplication_with_vector(self,other)
+            return dot_multiplication_with_vector(self, other)
         else:
             raise Exception("Invalid dot product")
-
 
     def get_dimension(self):
         return len(self.components)
