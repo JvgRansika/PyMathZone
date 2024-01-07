@@ -52,6 +52,13 @@ class Matrix:
         addition(m1, m2, m)
         return m
 
+    def __sub__(self, other):
+        if self.rows != other.rows or self.cols != other.cols:
+            raise Exception("Sizes of both matrix must be equal!")
+        m = Matrix(self.rows, self.cols)
+        addition(self, -1 * other, m)
+        return m
+
     def __mul__(m1, m2):
         if isinstance(m2, Matrix):
             if (m1.cols != m2.rows): raise Exception("The column count of first matrix must be equal to row count of second matrix!")
@@ -64,6 +71,15 @@ class Matrix:
             return m
         else:
             raise Exception("Invalid multiplication!")
+
+    def __rmul__(self, other):
+        if not isinstance(other, int) and not isinstance(other, float):
+            raise ValueError("Invalid multiplication!")
+
+        m = Matrix(self.rows, self.cols)
+        multiply(self, other, m)
+        return m
+
 
     def __eq__(self, other):
         if not isinstance(other, Matrix):
@@ -78,7 +94,7 @@ class Matrix:
                     return False
 
         return True
-    
+
     def isSquare(self):
         return self.rows == self.cols
 
@@ -88,7 +104,7 @@ class Matrix:
         return m
 
     def determinant(self):
-        return determinant(self)   
+        return determinant(self)
 
     def minor(self, r, c):
         if (not self.isSquare()):
@@ -103,11 +119,11 @@ class Matrix:
         if ((r < 0 or r > self.rows - 1) or (c < 0 or c > self.cols - 1)):
             raise Exception("Invalid position!")
         return cofactor(self, r, c)
-    
+
     def cofactorMatrix(self):
         if (not self.isSquare()):
             raise Exception("This only for square matrices!")
-        
+
         m = Matrix(self.rows, self.cols)
 
         for i in range(m.rows):
@@ -115,7 +131,7 @@ class Matrix:
                 m.set(i, j, self.cofactor(i, j))
 
         return m
-    
+
     def adjoint(self):
         return self.cofactorMatrix().transpose()
 
