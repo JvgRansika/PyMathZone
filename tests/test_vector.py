@@ -111,6 +111,30 @@ class TestVector(unittest.TestCase):
             vector.dot("hello")
         self.assertEqual(str(context.exception), "Invalid dot product")
 
+    def test_valid_cross_product(self):
+        v1 = Vector([1, 2, 3])
+        v2 = Vector([4, 5, 6])
+        expected_result = Vector([-3, 6, -3])
+        self.assertEqual(v1.cross(v2), expected_result)
+
+    def test_cross_product_with_non_vector(self):
+        v1 = Vector([1, 2, 3])
+        with self.assertRaises(Exception) as context:
+            v1.cross(5)  # Non-vector argument
+        self.assertEqual(str(context.exception), "Invalid cross product")
+
+    def test_cross_product_with_non_3d_vectors(self):
+        v1 = Vector([1, 2])  # 2D vector
+        v2 = Vector([4, 5, 6])
+        with self.assertRaises(Exception) as context:
+            v1.cross(v2)
+        self.assertEqual(str(context.exception), "cross product only defined for three dimensional vectors")
+
+    def test_cross_product_is_not_commutative(self):
+        v1 = Vector([1, 2, 3])
+        v2 = Vector([4, 5, 6])
+        self.assertNotEqual(v1.cross(v2), v2.cross(v1))
+
 
 
 if __name__ == '__main__':
