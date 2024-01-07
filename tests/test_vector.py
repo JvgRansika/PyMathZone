@@ -1,4 +1,8 @@
 import unittest
+
+import sys
+sys.path.append('../pymathzone')
+
 from pymathzone.vector import Vector
 
 
@@ -111,7 +115,31 @@ class TestVector(unittest.TestCase):
             vector.dot("hello")
         self.assertEqual(str(context.exception), "Invalid dot product")
 
+    def test_magnitude(self):
+        vector = Vector((1, 2, 2))
+        result = vector.magnitude()
+        expected = 3.0
+        self.assertEqual(result, expected)
 
+    def test_normalize_vector(self):
+        vector = Vector((0, 0, 1))
+        result = vector.normalize()
+        expected = Vector((0, 0, 1))
+        self.assertEqual(result, expected)
+
+    def test_angle_with_another_vector(self):
+        vector1 = Vector((2, 0, 0))
+        vector2 = Vector((0, 0, 3))
+        result = vector1.angle_with(vector2)
+        expected = 0.0
+        self.assertEqual(result, expected)
+
+    def test_projection_onto_another_vector(self):
+        vector1 = Vector((2, 0, 2))
+        vector2 = Vector((3, 0, 0))
+        result = vector1.project_onto(vector2)
+        expected = Vector((2, 0, 0))
+        self.assertEqual(result, expected)
 
 if __name__ == '__main__':
     unittest.main()
