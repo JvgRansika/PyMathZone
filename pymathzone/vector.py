@@ -88,5 +88,18 @@ class Vector:
             raise Exception("Parameter must be a Vector")
         return other.normalize() * self.dot(other.normalize())
 
+    def cross(self, other):
+        """
+        :param other: a vector
+        :return: a vector
+        """
+        if not isinstance(other, Vector):
+            raise Exception("Invalid cross product")
+
+        if self.get_dimension() != 3 or other.get_dimension() != 3:
+            raise Exception("cross product only defined for three dimensional vectors")
+
+        return Vector(cross_product(self, other))
+
     def get_dimension(self):
         return len(self.components)
