@@ -71,6 +71,22 @@ class Vector:
             return dot_multiplication_with_vector(self, other)
         else:
             raise Exception("Invalid dot product")
+        
+    def magnitude(self):
+        return magnitude(self)
+    
+    def normalize(self):
+        return Vector([x / self.magnitude() for x in self.components])
+    
+    def angle_with(self, other): # returns cos value
+        if (not isinstance(other, Vector)):
+            raise Exception("Parameter must be a Vector")
+        return self.dot(other) / (self.magnitude() * other.magnitude())
+    
+    def project_onto(self, other): # returns Vector
+        if (not isinstance(other, Vector)):
+            raise Exception("Parameter must be a Vector")
+        return other.normalize() * self.dot(other.normalize())
 
     def cross(self, other):
         """
